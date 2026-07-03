@@ -60,16 +60,22 @@ export async function POST(req: NextRequest) {
             }
         }
 
-        // Convert comma-separated strings into arrays
-        ["agenda", "tags"].forEach((field) => {
-            if (typeof body[field] === "string") {
-                body[field] = (body[field] as string)
-                    .split(",")
-                    .map((item) => item.trim())
-                    .filter(Boolean);
-            }
-        });
+     const tags =
+  typeof body.tags === "string"
+    ? body.tags
+        .split("\n")
+        .map(tag => tag.trim())
+        .filter(Boolean)
+    : body.tags;
 
+const agenda =
+  typeof body.agenda === "string"
+    ? body.agenda
+        .split("\n")
+        .map(item => item.trim())
+        .filter(Boolean)
+    : body.agenda;
+    
         if (typeof body.mode === "string") {
             body.mode = normalizeMode(body.mode);
         }
@@ -111,7 +117,7 @@ export async function POST(req: NextRequest) {
 
         console.log(body);
 
-        const createdEvent = await Event.create(body);
+        const createdEvent = await Event.create({ ...body, tags, agenda });
 
         return NextResponse.json(
             {
