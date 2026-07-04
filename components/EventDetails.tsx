@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Bookevent from "@/components/Bookevent";
+import { getRegistrationCountByEventId } from "@/lib/actions/booking.action";
 import {
   getEventBySlug,
   getsimilareventsbyslug,
@@ -76,7 +77,7 @@ const EventDetails = async ({ params }: EventDetailsProps) => {
     return notFound();
   }
 
-  const booking = 10;
+  const registrationCount = await getRegistrationCountByEventId(event._id);
   const similarEvents: EventData[] = await getsimilareventsbyslug(slug);
 
   return (
@@ -136,10 +137,13 @@ const EventDetails = async ({ params }: EventDetailsProps) => {
         <aside className="booking">
           <div className="signup-card">
             <h2>Book your seat</h2>
-            {booking > 0 ? (
-              <p className="text-lg font-semibold">Seats available: {booking}</p>
+            {registrationCount > 0 ? (
+              <p className="text-lg font-semibold">
+                {registrationCount}{" "}
+                {registrationCount === 1 ? "person" : "people"} registered
+              </p>
             ) : (
-              <p className="text-lg font-semibold">be the first to register</p>
+              <p className="text-lg font-semibold">Be the first to register</p>
             )}
             <Bookevent eventid={event._id} slug={event.slug} />
           </div>

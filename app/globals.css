@@ -90,6 +90,34 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@utility skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-dark-200) 0%,
+    color-mix(in oklch, var(--primary) 12%, var(--color-dark-200)) 45%,
+    var(--color-dark-100) 55%,
+    var(--color-dark-200) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+@utility sr-only {
+  @apply absolute size-px overflow-hidden whitespace-nowrap border-0 p-0;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  margin: -1px;
+}
+
 @utility flex-center {
   @apply flex items-center justify-center;
 }
