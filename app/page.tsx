@@ -7,11 +7,11 @@ const page = () => {
   return (
     <section>
       <h1 className="text-center">
-        The HUB FOR every dev <br />
-        Events shouldn&apos;t miss
+        The Event Hub for Developers <br />
+        Discover Events You Should Not Miss
       </h1>
       <p className="text-center mt-5">
-        Hackthons,Meetups and conference,all in one place
+        Hackathons, meetups, and conferences, all in one place.
       </p>
       <Explorer />
       <Suspense fallback={<FeaturedEventsSkeleton />}>

@@ -83,7 +83,7 @@ const EventDetails = async ({ params }: EventDetailsProps) => {
   return (
     <section id="event">
       <div className="header">
-        <h1>Event description</h1>
+        <h1>Event Description</h1>
         <p>{event.description}</p>
       </div>
 
@@ -136,14 +136,14 @@ const EventDetails = async ({ params }: EventDetailsProps) => {
 
         <aside className="booking">
           <div className="signup-card">
-            <h2>Book your seat</h2>
+            <h2>Reserve Your Seat</h2>
             {registrationCount > 0 ? (
               <p className="text-lg font-semibold">
                 {registrationCount}{" "}
                 {registrationCount === 1 ? "person" : "people"} registered
               </p>
             ) : (
-              <p className="text-lg font-semibold">Be the first to register</p>
+              <p className="text-lg font-semibold">Be the first to register.</p>
             )}
             <Bookevent eventid={event._id} slug={event.slug} />
           </div>

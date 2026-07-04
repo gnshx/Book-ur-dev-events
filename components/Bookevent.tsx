@@ -28,22 +28,22 @@ const Bookevent = ({ eventid, slug }: { eventid: string, slug: string }) => {
     return (
         <div id="book-event">
             {submitted ? (
-                <p className="text-lg font-semibold">Thank you for registering!</p>
+                <p className="text-lg font-semibold">Thank you for registering.</p>
             ) : (
                 <form onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="email">Email:</label>
+                        <label htmlFor="email">Email address</label>
                         <input
                             type="email"
                             id="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            placeholder="Enter your email"
+                            placeholder="Enter your email address"
                         />
                     </div>
                     <button type="submit" className="button-submit">
-                        SUBMIT
+                        Register
                     </button>
                 </form>
             )}

@@ -5,14 +5,14 @@ const Navbar = () => {
 <header>
     <nav>
         <Link href='/' className="logo">
-        <img src="/icons/logo.png" alt="logo" width={24} height={24} />
-        <p>Dev event</p>
+        <Image src="/icons/logo.png" alt="Book Your Dev Event logo" width={24} height={24} />
+        <p>Dev Events</p>
         </Link>
 
         <ul>
             <Link href="/">Home</Link>
             <Link href="/">Events</Link>
-            <Link href="/">Create event </Link>
+            <Link href="/">Create Event</Link>
         </ul>
     </nav>
 </header>    
