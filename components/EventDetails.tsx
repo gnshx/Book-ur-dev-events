@@ -6,8 +6,8 @@ import {
   getsimilareventsbyslug,
   type EventData,
 } from "@/lib/actions/event.actions";
+import { connection } from "next/server";
 import Eventcard from "@/components/Eventcard";
-import { cacheLife } from "next/cache";
 
 const EventDetailItem = ({
   icon,
@@ -67,8 +67,7 @@ interface EventDetailsProps {
 }
 
 const EventDetails = async ({ params }: EventDetailsProps) => {
-  "use cache";
-  cacheLife("hours");
+  await connection();
 
   const { slug } = await params;
   const event = await getEventBySlug(slug);

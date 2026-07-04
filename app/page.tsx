@@ -1,40 +1,33 @@
-import Explorer from "@/components/Explorerbtn"
-import Eventcard from '@/components/Eventcard'
-import { getAllEvents } from "@/lib/actions/event.actions";
-import { cacheLife } from "next/cache";
+import { Suspense } from "react";
+import Explorer from "@/components/Explorerbtn";
+import FeaturedEvents from "@/components/FeaturedEvents";
 
-const page = async () => {
-  
-'use cache'
-cacheLife('hours')
-  const events = await getAllEvents();
+const FeaturedEventsFallback = () => (
+  <div className="mt-20 space-y-7 animate-pulse">
+    <div className="h-6 w-40 rounded bg-muted" />
+    <div className="grid gap-4">
+      <div className="h-72 rounded bg-muted" />
+      <div className="h-72 rounded bg-muted" />
+    </div>
+  </div>
+);
 
+const page = () => {
   return (
-
     <section>
       <h1 className="text-center">
         The HUB FOR every dev <br />
-        Events shouldn't miss
+        Events shouldn&apos;t miss
       </h1>
-      <p className="text-center mt-5">Hackthons,Meetups and conference,all in one place</p>
+      <p className="text-center mt-5">
+        Hackthons,Meetups and conference,all in one place
+      </p>
       <Explorer />
-      <div className="mt-20 space-y-7 ">
-        <h3>
-          featured-events
-        </h3>
-        <ul className="events">
-          {events.length > 0 && events.map((event) => (
-
-            <li key={event.title}  className="list-none">
-              <Eventcard {...event} />
-            </li>
-
-          ))}
-        </ul>
-
-      </div>
+      <Suspense fallback={<FeaturedEventsFallback />}>
+        <FeaturedEvents />
+      </Suspense>
     </section>
-  )
-}
+  );
+};
 
-export default page
+export default page;
