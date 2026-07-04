@@ -18,7 +18,7 @@ https://book-ur-dev-events.vercel.app/
 
 # ✨ Highlights
 
-* ⚡ Built using **Next.js 15 App Router**
+* ⚡ Built using **Next.js 16 App Router**
 * 🔍 SEO-first architecture with dynamic metadata
 * 🌐 Clean slug-based routing for search engine optimization
 * 🗄️ MongoDB-backed event management
