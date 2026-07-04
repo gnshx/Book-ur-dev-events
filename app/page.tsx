@@ -1,17 +1,13 @@
 import Explorer from "@/components/Explorerbtn"
 import Eventcard from '@/components/Eventcard'
-import { events } from '@/lib/constants'
-import { IEvent } from "@/database/event.model";
+import { getAllEvents } from "@/lib/actions/event.actions";
 import { cacheLife } from "next/cache";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const page = async () => {
   
 'use cache'
 cacheLife('hours')
-  const response = await fetch(`${BASE_URL}/api/events`);
-  const { events } = await response.json();
+  const events = await getAllEvents();
 
   return (
 
@@ -27,7 +23,7 @@ cacheLife('hours')
           featured-events
         </h3>
         <ul className="events">
-          {events && events.length > 0 && events.map((event: IEvent) => (
+          {events.length > 0 && events.map((event) => (
 
             <li key={event.title}  className="list-none">
               <Eventcard {...event} />

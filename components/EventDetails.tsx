@@ -1,12 +1,13 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Bookevent from "@/components/Bookevent";
-import { getsimilareventsbyslug } from "@/lib/actions/event.actions";
-import { IEvent } from "@/database/event.model";
+import {
+  getEventBySlug,
+  getsimilareventsbyslug,
+  type EventData,
+} from "@/lib/actions/event.actions";
 import Eventcard from "@/components/Eventcard";
 import { cacheLife } from "next/cache";
-
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 const EventDetailItem = ({
   icon,
@@ -70,15 +71,14 @@ const EventDetails = async ({ params }: EventDetailsProps) => {
   cacheLife("hours");
 
   const { slug } = await params;
-  const response = await fetch(`${BASE_URL}/api/events/${slug}`);
-  const { event } = await response.json();
+  const event = await getEventBySlug(slug);
 
   if (!event) {
     return notFound();
   }
 
   const booking = 10;
-  const similarEvents: IEvent[] = await getsimilareventsbyslug(slug);
+  const similarEvents: EventData[] = await getsimilareventsbyslug(slug);
 
   return (
     <section id="event">
@@ -151,7 +151,7 @@ const EventDetails = async ({ params }: EventDetailsProps) => {
         <h2>Similar Events</h2>
         <div className="events">
           {similarEvents.length > 0 &&
-            similarEvents.map((similarEvent: IEvent) => (
+            similarEvents.map((similarEvent) => (
               <Eventcard key={similarEvent.title} {...similarEvent} />
             ))}
         </div>
