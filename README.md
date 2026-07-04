@@ -129,7 +129,7 @@ Benefits include:
 
 ---
 
-# ⚡ Next.js 15 Features
+# ⚡ Next.js 16 Features
 
 Built using the latest App Router architecture.
 
@@ -146,6 +146,8 @@ Implemented:
 * Metadata API
 * Image Optimization
 * Font Optimization
+* caching
+* suspense 
 
 ---
 
@@ -365,7 +367,7 @@ styles/
 
 ---
 
-# 📈 Resume Highlights
+# 📈  Highlights
 
 This project demonstrates practical experience with:
 
